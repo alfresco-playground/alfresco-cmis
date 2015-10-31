@@ -37,8 +37,9 @@ type Client(config: Config) =
 
         let parentFolder = session.GetObject(folderId) :?> IFolder
         let property = System.Collections.Generic.Dictionary<string,obj>()
-        let add (key:string) (value) = parameters.Add(key, value)
+        let add (key:string) (value) = property.Add(key, value)
         add PropertyIds.Name doc.Title
+        add PropertyIds.ObjectTypeId "cmis:document"
 
         let stream = ContentStream()
         stream.FileName <- sprintf "%s.pdf" doc.Title
@@ -57,7 +58,7 @@ let go args =
     let config = {
         UserName = "admin"
         Password = "admin"
-        AtomPubUrl = "http://127.0.0.1:8081/alfresco/api/-default-/public/cmis/versions/1.1/atom" }
+        AtomPubUrl = "http://127.0.0.1:8081/alfresco/api/-default-/public/cmis/versions/1.0/atom" }
     let document = {
         Title = "HelloWorld"
         Content = File.ReadAllBytes("resource/limiting.pdf") }
