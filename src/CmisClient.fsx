@@ -51,6 +51,9 @@ type Client(config: Config) =
 
 [<EntryPoint>]
 let go args =
+
+    printfn "|| params -> %A" args
+
     let config = {
         UserName = "admin"
         Password = "admin"
@@ -60,7 +63,7 @@ let go args =
         Content = File.ReadAllBytes("resource/hello.txt") }
 
     let client = Client(config)
-    let rs = client.InsertDocument(document, args.[1])
+    let rs = client.InsertDocument(document, args.[0])
     0
 
 
