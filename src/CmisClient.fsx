@@ -60,7 +60,7 @@ let go args =
         AtomPubUrl = "http://127.0.0.1:8081/alfresco/api/-default-/public/cmis/versions/1.1/atom" }
     let document = {
         Title = "HelloWorld"
-        Content = File.ReadAllBytes("resource/hello.txt") }
+        Content = File.ReadAllBytes("resource/limiting.pdf") }
 
     let client = Client(config)
     let rs = client.InsertDocument(document, args.[0])
