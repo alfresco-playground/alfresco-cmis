@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="my:mycustommodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+    <description>Example custom Model</description>
+    <author></author>
+    <version>1.0</version>
+    <imports>
+        <import prefix="d" uri="http://www.alfresco.org/model/dictionary/1.0"/>
+        <import prefix="cm" uri="http://www.alfresco.org/model/content/1.0"/>
+    </imports>
+    <namespaces>
+        <namespace prefix="my" uri="my.custom.model"/>
+    </namespaces>
+    <constraints>
+        <constraint name="my:currency_constraint" type="LIST">
+            <parameter name="allowedValues">
+                <list>
+                    <value>CHF</value>
+                    <value>EUR</value>
+                    <value>USD</value>
+                </list>
+            </parameter>
+        </constraint>
+    </constraints>
+    <types>
+        <type name="my:standard">
+            <title>Standard Document</title>
+            <parent>cm:content</parent>
+            <mandatory-aspects>
+                <aspect>cm:taggable</aspect>
+                <aspect>my:defaults</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="my:invoice">
+            <title>Invoice</title>
+            <parent>my:standard</parent>
+            <mandatory-aspects>
+                <aspect>my:billable</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="my:contract">
+            <title>Contract</title>
+            <parent>my:standard</parent>
+        </type>
+    </types>
+    <aspects>
+        <aspect name="my:defaults">
+            <title>Default aspect</title>
+            <properties>
+                <property name="my:receivingDate">
+                    <title>Receiving date</title>
+                    <type>d:datetime</type>
+                </property>
+                <property name="my:pagesCount">
+                    <title>Amount of pages</title>
+                    <type>d:int</type>
+                </property>
+                <property name="my:priority">
+                    <title>Priority</title>
+                    <type>d:int</type>
+                </property>
+                <property name="my:senderName">
+                    <title>Sender-Name</title>
+                    <type>d:text</type>
+                </property>
+            </properties>
+        </aspect>
+        <aspect name="my:billable">
+            <title>Billable aspect</title>
+            <properties>
+                <property name="my:amount">
+                    <title>Amount</title>
+                    <type>d:float</type>
+                </property>
+                <property name="my:currency">
+                    <title>Currency</title>
+                    <type>d:text</type>
+                    <default>CHF</default>
+                    <constraints>
+                        <constraint ref="my:currency_constraint"/>
+                    </constraints>
+                </property>
+                <property name="my:executionDate">
+                    <title>Execution date</title>
+                    <type>d:datetime</type>
+                </property>
+                <property name="my:paymentPriority">
+                    <title>Payment priority</title>
+                    <type>d:int</type>
+                </property>
+                <property name="my:beneficiaryName">
+                    <title>Beneficiary name</title>
+                    <type>d:text</type>
+                </property>
+                <property name="my:beneficiaryIBAN">
+                    <title>Beneficiary IBAN number</title>
+                    <type>d:text</type>
+                </property>
+            </properties>
+        </aspect>
+    </aspects>
+</model>
