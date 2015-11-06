@@ -1,4 +1,4 @@
-### Test alfresco cmis using DotCmis
+### Test alfresco CMIS using DotCMIS
 
 #### Build
 
